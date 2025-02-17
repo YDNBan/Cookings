@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.App {
+    justify-self: center;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+}
+
+pre {
+    white-space: pre-wrap;  /* This makes the text wrap */
+    justify-self: center;
+    word-wrap: break-word;  /* This breaks words if necessary to avoid overflow */
+    max-width: 75%;        /* Prevents the content from stretching too far across */
+    overflow-wrap: break-word; /* Ensures long words get wrapped too */
+    margin: 10px 0;         /* Adds some space around the displayed data */
+    padding: 10px;          /* Adds some padding for readability */
+    background-color: #f4f4f4; /* Adds a background color for better contrast */
+    border-radius: 5px;     /* Optional: adds rounded corners for styling */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow for depth */
+}
