@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import "./apiSearchbar.css";
-
+import '../../../index.css'
 interface ApiSearchbarProps {
     onSearch: (query: string) => void; // Ensuring onSearch is a function that takes a string
 }
@@ -16,14 +15,14 @@ const ApiSearchbar: React.FC<ApiSearchbarProps> = ({ onSearch }) => {
     };
 
     return (
-        <form className="api-searchbar" onSubmit={handleSubmit}>
-            <input 
+        <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+            <input className="border-white"
                 type="text" 
-                placeholder="Enter API query..." 
+                placeholder="Search For Hotel..." 
                 value={query} 
                 onChange={(e) => setQuery(e.target.value)}
             />
-            <button type="submit">Fetch</button>
+            <button className="bg-blue-900 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md" type="submit">Search</button>
         </form>
     );
 };

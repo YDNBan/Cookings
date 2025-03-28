@@ -1,36 +1,30 @@
 import React from "react";
-import "./Hero.css";
 import ApiSearchbar from "../../organisms/apiSearchbar/apiSearchbar";
-import { useSearch } from "../../molecules/useSearch";
+import { useNavigate } from "react-router-dom";
 
 const Hero: React.FC = () => {
-  const { data, loading, error, handleSearch } = useSearch();
-  const publicUrl = import.meta.env.VITE_PUBLIC_URL ?? "";
+  const navigate = useNavigate(); // Use navigate to go to a new page
+
+  const handleSearch = (query: string) => {
+    if (query.trim()) {
+      navigate(`/search?query=${encodeURIComponent(query)}`);
+    }
+  };
 
   return (
-    <section className="Hero">
-      <video autoPlay loop muted playsInline className="video-bg">
-      <source src={`${publicUrl}/hotel-video.mp4`} type="video/mp4" />
+    <section className="relative w-full h-[500px] flex items-center justify-center text-center text-white z-[1]">
+      <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover z-[-1]">
+        <source src="/hotel-video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="overlay"></div>
-      <div className="content">
-        <h1>Find The Right Hotel For You</h1>
-        <p>Compare prices, read reviews, and make the best deal for you.</p>
+      <div className="absolute top-0 left-0 w-full h-full bg-black/50 z-0"></div>
+      <div className="relative z-1 max-w-[600px] p-5">
+        <h1 className="text-4xl mb-2">Find The Right Hotel For You</h1>
+        <p className="text-xl mb-5">Compare prices, read reviews, and make the best deal for you.</p>
 
         <div className="search-bar">
           <ApiSearchbar onSearch={handleSearch} />
         </div>
-
-        {/* Display Loading, Error, or Data */}
-        {loading && <p>Loading...</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        {data && (
-          <div>
-            <h3>Results:</h3>
-            <pre>{JSON.stringify(data, null, 2)}</pre> {/* Pretty-print JSON */}
-          </div>
-        )}
       </div>
     </section>
   );
