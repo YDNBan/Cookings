@@ -1,8 +1,6 @@
 import requests
 import datetime
 
-
-# must pip install requests 
 # API credentials and host info
 API_KEY = "ENTER YOUR API KEY HERE"
 API_HOST = "booking-com15.p.rapidapi.com"
