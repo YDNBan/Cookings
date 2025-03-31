@@ -16,14 +16,14 @@ const ApiSearchbar: React.FC<ApiSearchbarProps> = ({ onSearch }) => {
     };
 
     return (
-        <form className="api-searchbar" onSubmit={handleSubmit}>
+        <form className="api-searchbar search-bar-container" onSubmit={handleSubmit}>
             <input 
                 type="text" 
-                placeholder="Enter API query..." 
+                placeholder="Search for hotels..." 
                 value={query} 
                 onChange={(e) => setQuery(e.target.value)}
             />
-            <button type="submit">Fetch</button>
+            <button type="submit">Search</button>
         </form>
     );
 };

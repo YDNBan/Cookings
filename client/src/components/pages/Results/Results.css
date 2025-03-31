@@ -1,0 +1,114 @@
+/* Ensure the overlay section contains the hotel cards */
+.Hero {
+    position: relative;
+    width: 100%;
+    height: auto; /* Adjust height to fit content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    z-index: 1;
+    padding: 20px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Darker overlay */
+    z-index: 0; /* Ensure it's behind text */
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+/* Style the search results */
+.search-results {
+    display: grid;
+    grid-template-columns: 1fr; /* One column per row */
+    gap: 20px; /* Space between rows */
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Style individual hotel cards */
+
+.hotel-card img {
+    width: 150px; /* Set a fixed width for the image */
+    height: auto;
+    border-radius: 8px;
+    margin-right: 15px; /* Add space between the image and text */
+}
+
+.hotel-card h2 {
+    font-size: 1.5rem;
+    margin: 10px 0; /* Space below the name */
+}
+
+.hotel-card p {
+    font-size: 1rem;
+    margin: 0; /* Remove extra margin above the address */
+}
+
+.read-more-button {
+    background: none; /* Remove background */
+    color: #007bff; /* Subtle blue color */
+    border: none; /* Remove border */
+    padding: 0; /* Remove padding */
+    font-size: 0.9rem; /* Slightly smaller font size */
+    text-decoration: underline; /* Add underline to make it look like a link */
+    cursor: pointer;
+    position: absolute; /* Position it on the right edge */
+    right: 15px; /* Adjust distance from the right edge */
+    bottom: 15px; /* Adjust distance from the bottom edge */
+    transition: color 0.3s ease;
+}
+
+.read-more-button:hover {
+    color: #0056b3; /* Darker blue on hover */
+}
+
+/* Ensure the hotel card has relative positioning for the button to align properly */
+.hotel-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust height as needed */
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1); /* Light gray border */
+    border-top: 4px solid #007bff; /* Blue border for the spinner */
+    border-radius: 50%;
+    animation: spin 1s linear infinite; /* Infinite spinning animation */
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

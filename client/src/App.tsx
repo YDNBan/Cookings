@@ -1,14 +1,17 @@
 import './App.css'
 import Navbar from './components/organisms/Navbar/Navbar'
 import Hero from './components/pages/Hero/Hero';
+import Results from './components/pages/Results/Results';
 
 const App = () => {
  
   return (
     <div className='App'>
       <Navbar />
-      <Hero />
+      {/*<Hero/> */}
+      <Results/>
     </div>
+    //For time being make a container with a static list of hotels. 
   );
 };
 
