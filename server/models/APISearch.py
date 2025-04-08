@@ -1,5 +1,8 @@
+from flask import Flask, request, jsonify
 import requests
 import datetime
+
+app = Flask(__name__)
 
 # API credentials and host info
 API_KEY = "ENTER YOUR API KEY HERE"
@@ -15,19 +18,17 @@ def search_destination(query, country_filter=None):
     
     response = requests.get(url, headers=HEADERS, params=params)
     if response.status_code != 200:
-        print("Error during destination search:", response.status_code, response.text)
         return None, None
 
     data = response.json()
     
-    # Extract destinations from the "data" key if present.
     if isinstance(data, dict) and "data" in data:
         destinations = data["data"]
     elif isinstance(data, list):
         destinations = data
     else:
         destinations = []
-
+    
     if country_filter:
         destinations = [dest for dest in destinations if dest.get("country", "").strip() == country_filter]
 
@@ -36,14 +37,12 @@ def search_destination(query, country_filter=None):
         dest_id = destination.get("dest_id")
         return dest_id, destination
     else:
-        print("No destinations found for query:", query)
         return None, None
 
 def search_hotels(dest_id, adults=1, children_age="0,17", room_qty=1, page_number=1,
                   units="metric", temperature_unit="c", languagecode="en-us",
                   currency_code="AED", location="US", search_type="CITY",
                   arrival_date=None, departure_date=None):
-    # Set default arrival and departure dates if not provided:
     if arrival_date is None or departure_date is None:
         today = datetime.date.today()
         tomorrow = today + datetime.timedelta(days=1)
@@ -69,11 +68,9 @@ def search_hotels(dest_id, adults=1, children_age="0,17", room_qty=1, page_numbe
     
     response = requests.get(url, headers=HEADERS, params=params)
     if response.status_code != 200:
-        print("Error during hotel search:", response.status_code, response.text)
         return None
-
-    hotels_data = response.json()
     
+    hotels_data = response.json()
     hotels = []
     if isinstance(hotels_data, dict) and "data" in hotels_data:
         data_section = hotels_data["data"]
@@ -86,40 +83,22 @@ def search_hotels(dest_id, adults=1, children_age="0,17", room_qty=1, page_numbe
     
     return hotels
 
-def main():
-    user_input = input("Enter a city search query (e.g., 'man' or 'man, United States of America'): ").strip()
+@app.route('/searchAPI', methods=['GET'])
+def searchAPI():
+    query = request.args.get('query')
+    country_filter = request.args.get('country_filter')
     
-    country_filter = None
-    if ", United States of America" in user_input:
-        user_input = user_input.replace(", United States of America", "").strip()
-        country_filter = "United States of America"
+    dest_id, destination_info = search_destination(query, country_filter)
+    if not dest_id:
+        return jsonify({"error": "No destination found"}), 404
     
-    dest_id, destination_info = search_destination(user_input, country_filter)
-    if dest_id:
-        print("\nFound Destination:")
-        print(f"Name: {destination_info.get('name', 'N/A')}")
-        print(f"Country: {destination_info.get('country', 'N/A')}")
-        print(f"Destination ID: {dest_id}\n")
-        
-        hotels = search_hotels(dest_id)
-        if hotels:
-            print("Hotels in the selected destination:")
-            for hotel in hotels:
-                if isinstance(hotel, dict):
-                    # Extract hotel details from the 'property' dictionary if available.
-                    property_info = hotel.get("property", {})
-                    hotel_name = property_info.get("name", "N/A")
-                    review_score = property_info.get("reviewScore", "N/A")
-                    # You might add more fields as needed.
-                    print(f"Hotel Name: {hotel_name}")
-                    print(f"Review Score: {review_score}")
-                else:
-                    print("Hotel info:", hotel)
-                print("-" * 40)
-        else:
-            print("No hotels found for this destination.")
-    else:
-        print("No valid destination was found.")
+    hotels = search_hotels(dest_id)
+    result = {
+        "dest_id": dest_id,
+        "destination_info": destination_info,
+        "hotels": hotels
+    }
+    return jsonify(result)
 
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    app.run(debug=True)
