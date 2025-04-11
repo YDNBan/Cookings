@@ -2,7 +2,7 @@ import requests
 import datetime
 
 # API credentials and host info
-API_KEY = "ENTER YOUR API KEY HERE"
+API_KEY = "69150d8f56msh7db24ce8d7bf7b0p1e6bd6jsn10374c36c8b6"
 API_HOST = "booking-com15.p.rapidapi.com"
 HEADERS = {
     "x-rapidapi-host": API_HOST,
@@ -40,9 +40,9 @@ def search_destination(query, country_filter=None):
         return None, None
 
 def search_hotels(dest_id, adults=1, children_age="0,17", room_qty=1, page_number=1,
-                  units="metric", temperature_unit="c", languagecode="en-us",
-                  currency_code="AED", location="US", search_type="CITY",
-                  arrival_date=None, departure_date=None):
+    units="metric", temperature_unit="c", languagecode="en-us",
+    currency_code="AED", location="US", search_type="CITY",
+    arrival_date=None, departure_date=None):
     # Set default arrival and departure dates if not provided:
     if arrival_date is None or departure_date is None:
         today = datetime.date.today()
