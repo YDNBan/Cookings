@@ -16,7 +16,7 @@ const ApiSearchbar: React.FC<ApiSearchbarProps> = ({ onSearch }) => {
 
     return (
         <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-            <input className="border-white"
+            <input className="border-white text-white"
                 type="text" 
                 placeholder="Search For Hotel..." 
                 value={query} 

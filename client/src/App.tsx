@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/organisms/Navbar/Navbar";
 import Hero from "./components/pages/Hero/Hero";
-import SearchResults from "./components/pages/Search/SearchResults"; 
+import Results from './components/pages/Results/Results';
+import HotelDetail from "./components/pages/HotelDetail/HotelDetail";
 import Footer from "./components/organisms/Footer";
 
 const App = () => {
@@ -12,7 +13,8 @@ const App = () => {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Hero />} />
-            <Route path="/search" element={<SearchResults />} />
+            <Route path="/search" element={<Results />} />
+            <Route path="/hotels/:id" element={<HotelDetail />} />
           </Routes>
         </main>
         <Footer />
