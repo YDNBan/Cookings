@@ -1,0 +1,47 @@
+[
+  {
+    "hotelId": 1,
+    "hotelName": "Grand Charlotte Hotel",
+    "hotelImage": "https://via.placeholder.com/150",
+    "hotelAddress": "123 Main St, Charlotte, NC",
+    "description": "A luxurious stay in the heart of Charlotte, offering premium amenities and exceptional service.",
+    "lat": 35.2271,
+    "lng": -80.8431
+  },
+  {
+    "hotelId": 2,
+    "hotelName": "Queen City Inn",
+    "hotelImage": "https://via.placeholder.com/150",
+    "hotelAddress": "456 Elm St, Charlotte, NC",
+    "description": "A cozy and affordable inn located near downtown attractions and local dining spots.",
+    "lat": 35.226446,
+    "lng": -80.839209
+  },
+  {
+    "hotelId": 3,
+    "hotelName": "Uptown Suites",
+    "hotelImage": "https://via.placeholder.com/150",
+    "hotelAddress": "789 Pine St, Charlotte, NC",
+    "description": "Modern suites with extended stay options, perfect for business travelers and long visits.",
+    "lat": 35.226446,
+    "lng": -80.839209
+  },
+  {
+    "hotelId": 4,
+    "hotelName": "Southern Comfort Hotel",
+    "hotelImage": "https://via.placeholder.com/150",
+    "hotelAddress": "101 Maple Ave, Charlotte, NC",
+    "description": "Experience Southern hospitality with charming rooms and close proximity to uptown Charlotte.",
+    "lat": 35.22814,
+    "lng": -80.844402
+  },
+  {
+    "hotelId": 5,
+    "hotelName": "Skyline View Resort",
+    "hotelImage": "https://via.placeholder.com/150",
+    "hotelAddress": "202 Oak Dr, Charlotte, NC",
+    "description": "Enjoy breathtaking city views and resort-style amenities in a peaceful setting.",
+    "lat": 35.226446,
+    "lng": -80.839209
+  }
+]

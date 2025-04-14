@@ -3,6 +3,8 @@ import ApiSearchbar from "../../organisms/apiSearchbar/apiSearchbar";
 import { useSearch } from "../../molecules/useSearch";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import HotelMap from "../../organisms/HotelMap";
+import dummyHotels from "../../../data/dummyHotels.json";
+import HotelCard from "../../atoms/HotelCard";
 
 const Results: React.FC = () => {
   const { data, loading, error, handleSearch } = useSearch();
@@ -16,58 +18,6 @@ const Results: React.FC = () => {
       handleSearch(query);
     }
   }, [query]);
-
-  type Job = {
-    hotelId: number;
-    hotelName: string;
-    hotelImage: string;
-    hotelAddress: string;
-    lat: number;
-    lng: number;
-  };
-
-  const dummyHotels: Job[] = [
-    {
-      hotelId: 1,
-      hotelName: "Grand Charlotte Hotel",
-      hotelImage: "https://via.placeholder.com/150",
-      hotelAddress: "123 Main St, Charlotte, NC",
-      lat: 35.2271,
-      lng: -80.8431,
-    },
-    {
-      hotelId: 2,
-      hotelName: "Queen City Inn",
-      hotelImage: "https://via.placeholder.com/150",
-      hotelAddress: "456 Elm St, Charlotte, NC",
-      lat: 35.226446,
-      lng: -80.839209,
-    },
-    {
-      hotelId: 3,
-      hotelName: "Uptown Suites",
-      hotelImage: "https://via.placeholder.com/150",
-      hotelAddress: "789 Pine St, Charlotte, NC",
-      lat: 35.226446,
-      lng: -80.839209,
-    },
-    {
-      hotelId: 4,
-      hotelName: "Southern Comfort Hotel",
-      hotelImage: "https://via.placeholder.com/150",
-      hotelAddress: "101 Maple Ave, Charlotte, NC",
-      lat: 35.22814,
-      lng: -80.844402,
-    },
-    {
-      hotelId: 5,
-      hotelName: "Skyline View Resort",
-      hotelImage: "https://via.placeholder.com/150",
-      hotelAddress: "202 Oak Dr, Charlotte, NC",
-      lat: 35.226446,
-      lng: -80.839209,
-    },
-  ];
 
   return (
     <section className="relative w-full min-h-screen text-white">
@@ -91,7 +41,7 @@ const Results: React.FC = () => {
         {/* Left side: Results */}
         <div className="w-1/2 overflow-y-auto" ref={resultsRef}>
           <h1 className="text-3xl font-bold text-white mb-6 text-center">
-            Here are your results for Charlotte, NC!
+            Here are your results for {query || "your search"}!
           </h1>
 
           <ApiSearchbar onSearch={handleSearch} />
@@ -102,27 +52,9 @@ const Results: React.FC = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-5 mt-6">
+              {/* MAKE EVERYTHING IN THE MAP INTO A COMPONENT */}
               {dummyHotels.map((hotel) => (
-                <div
-                  key={hotel.hotelId}
-                  className="relative flex items-center bg-white rounded-lg p-4 shadow-md"
-                >
-                  <img
-                    src={hotel.hotelImage}
-                    alt={hotel.hotelName}
-                    className="w-[150px] h-auto rounded-md mr-4"
-                  />
-                  <div className="text-left text-black">
-                    <h2 className="text-xl font-bold mb-2">{hotel.hotelName}</h2>
-                    <p className="text-base">{hotel.hotelAddress}</p>
-                  </div>
-                  <button
-                    onClick={() => navigate(`/hotels/${hotel.hotelId}`)}
-                    className="absolute bottom-4 right-4 text-blue-500 text-sm underline hover:text-blue-700 transition"
-                  >
-                    Read More
-                  </button>
-                </div>
+                <HotelCard key={hotel.hotelId} hotel={hotel}/>
               ))}
             </div>
           )}

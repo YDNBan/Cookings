@@ -1,43 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import dummyHotels from "../../../data/dummyHotels.json";
 
-const dummyHotels = [
-  {
-    hotelId: 1,
-    hotelName: "Grand Charlotte Hotel",
-    hotelImage: "https://via.placeholder.com/600x400",
-    hotelAddress: "123 Main St, Charlotte, NC",
-    description: "A luxurious hotel in the heart of Charlotte with stunning views and top-tier service.",
-  },
-  {
-    hotelId: 2,
-    hotelName: "Queen City Inn",
-    hotelImage: "https://via.placeholder.com/600x400",
-    hotelAddress: "456 Elm St, Charlotte, NC",
-    description: "Affordable and comfortable accommodations in a great location.",
-  },
-  {
-    hotelId: 3,
-    hotelName: "Uptown Suites",
-    hotelImage: "https://via.placeholder.com/600x400",
-    hotelAddress: "789 Pine St, Charlotte, NC",
-    description: "Modern rooms and walkable access to downtown Charlotte.",
-  },
-  {
-    hotelId: 4,
-    hotelName: "Southern Comfort Hotel",
-    hotelImage: "https://via.placeholder.com/600x400",
-    hotelAddress: "101 Maple Ave, Charlotte, NC",
-    description: "Cozy rooms and friendly Southern hospitality.",
-  },
-  {
-    hotelId: 5,
-    hotelName: "Skyline View Resort",
-    hotelImage: "https://via.placeholder.com/600x400",
-    hotelAddress: "202 Oak Dr, Charlotte, NC",
-    description: "Enjoy breathtaking skyline views and premium amenities.",
-  },
-];
 
 const HotelDetail: React.FC = () => {
   const { id } = useParams();
