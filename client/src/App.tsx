@@ -3,6 +3,7 @@ import Navbar from "./components/organisms/Navbar/Navbar";
 import Hero from "./components/pages/Hero/Hero";
 import Results from './components/pages/Results/Results';
 import HotelDetail from "./components/pages/HotelDetail/HotelDetail";
+import Info from "./components/pages/Info/Info";
 import Footer from "./components/organisms/Footer";
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
             <Route path="/" element={<Hero />} />
             <Route path="/search" element={<Results />} />
             <Route path="/hotels/:id" element={<HotelDetail />} />
+            <Route path="/info" element={<Info/>} />
           </Routes>
         </main>
         <Footer />
