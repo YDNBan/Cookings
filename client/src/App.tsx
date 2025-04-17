@@ -5,6 +5,7 @@ import Results from './components/pages/Results/Results';
 import HotelDetail from "./components/pages/HotelDetail/HotelDetail";
 import Info from "./components/pages/Info/Info";
 import Footer from "./components/organisms/Footer";
+import Contact from "./components/pages/Contact/Contact";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/search" element={<Results />} />
             <Route path="/hotels/:id" element={<HotelDetail />} />
             <Route path="/info" element={<Info/>} />
+            <Route path="/contact" element={<Contact/>} />
           </Routes>
         </main>
         <Footer />

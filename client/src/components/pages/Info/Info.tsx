@@ -7,7 +7,7 @@ const Info: React.FC = () => {
       <h1 className="text-4xl font-bold mb-6">About Us</h1>
       <div className="bg-white text-black p-6 rounded-lg shadow-md max-w-3xl text-center">
         <p className="text-lg mb-6">
-          Welcome to our Hotel Tracker! We hope your experience with us is as smooth as possible. If not please let us know through our contact page!
+          Welcome to our Hotel Tracker! We hope your experience with us is as smooth as possible. If not please feel free to email us using the emails in our contact page!
         </p>
       </div>
       <h1 className="text-4xl font-bold mb-6 mt-10">Meet the Team!</h1>
@@ -21,6 +21,7 @@ const Info: React.FC = () => {
             <div>
                 <h4 className="text-xl font-bold">Connor Ayscue</h4>
                 <p>Front-End Developer</p>
+                <p>connorjayscue@gmail.com</p>
             </div>
         </div>
 
@@ -29,6 +30,7 @@ const Info: React.FC = () => {
             <div>
                 <h4 className="text-xl font-bold">Daniel Remington</h4>
                 <p>Front-End Developer</p>
+                <p>example@gmail.com</p>
             </div>
         </div>
 
@@ -37,6 +39,7 @@ const Info: React.FC = () => {
             <div>
                 <h4 className="text-xl font-bold">Kha Ho</h4>
                 <p>Back-End Developer</p>
+                <p>example@gmail.com</p>
             </div>
         </div>
 
@@ -45,14 +48,16 @@ const Info: React.FC = () => {
             <div>
                 <h4 className="text-xl font-bold">Dom Nieban</h4>
                 <p>Back-End Developer/Project Manager</p>
+                <p>example@gmail.com</p>
             </div>
         </div>
 
         <div className="flex items-center gap-4 mb-6 text-left">
             <img src="" alt="Team pfp" className="w-24 h-24 rounded-full shadow-md" />
             <div>
-                <h4 className="text-xl font-bold">Mat Jenson</h4>
+                <h4 className="text-xl font-bold">Mat Jensen</h4>
                 <p>Back-End Developer</p>
+                <p>example@gmail.com</p>
             </div>
         </div>
     </div>
