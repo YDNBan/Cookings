@@ -111,5 +111,5 @@ def main():
     # Output the result to stdout in JSON format
     print(json.dumps(result))
 
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    app.run(debug=True)
