@@ -21,7 +21,7 @@ const Info: React.FC = () => {
             <div>
                 <h4 className="text-xl font-bold">Connor Ayscue</h4>
                 <p>Front-End Developer</p>
-                <p>connorjayscue@gmail.com</p>
+                <p>cayscue@uncc.edu</p>
             </div>
         </div>
 
@@ -30,7 +30,7 @@ const Info: React.FC = () => {
             <div>
                 <h4 className="text-xl font-bold">Daniel Remington</h4>
                 <p>Front-End Developer</p>
-                <p>example@gmail.com</p>
+                <p>dremingt@charlotte.edu</p>
             </div>
         </div>
 
@@ -39,7 +39,7 @@ const Info: React.FC = () => {
             <div>
                 <h4 className="text-xl font-bold">Kha Ho</h4>
                 <p>Back-End Developer</p>
-                <p>example@gmail.com</p>
+                <p>kho7@charlotte.edu</p>
             </div>
         </div>
 
@@ -48,7 +48,7 @@ const Info: React.FC = () => {
             <div>
                 <h4 className="text-xl font-bold">Dom Nieban</h4>
                 <p>Back-End Developer/Project Manager</p>
-                <p>example@gmail.com</p>
+                <p>ynieban@uncc.edu</p>
             </div>
         </div>
 
@@ -57,7 +57,7 @@ const Info: React.FC = () => {
             <div>
                 <h4 className="text-xl font-bold">Mat Jensen</h4>
                 <p>Back-End Developer</p>
-                <p>example@gmail.com</p>
+                <p>mjense13@charlotte.edu</p>
             </div>
         </div>
     </div>
