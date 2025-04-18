@@ -40,9 +40,9 @@ def search_destination(query, country_filter=None):
         return None, None
 
 def search_hotels(dest_id, adults=1, children_age="0,17", room_qty=1, page_number=1,
-                  units="metric", temperature_unit="c", languagecode="en-us",
-                  currency_code="AED", location="US", search_type="CITY",
-                  arrival_date=None, departure_date=None):
+                units="metric", temperature_unit="c", languagecode="en-us",
+                currency_code="AED", location="US", search_type="CITY",
+                arrival_date=None, departure_date=None):
     if arrival_date is None or departure_date is None:
         today = datetime.date.today()
         tomorrow = today + datetime.timedelta(days=1)
