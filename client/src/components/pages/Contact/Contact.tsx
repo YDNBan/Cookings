@@ -1,5 +1,4 @@
 import React from "react";
-import connorPfp from "../../../../public/IMG_9893.jpg";
 
 const team = [
     {
