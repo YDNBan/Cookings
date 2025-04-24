@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const apiRoutes = require('./routes/apiRoutes')
+const hotelRoutes = require('./routes/hotelRoutes')
 
 // Create the Express App
 const app = express();
@@ -18,5 +18,5 @@ app.listen(port, host, ()=> {
 })
 
 // Routes
-app.use('/api', apiRoutes)
+app.use('/hotels', hotelRoutes)
 
