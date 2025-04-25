@@ -1,3 +1,8 @@
+//TODO: ADD SORTING 
+  //SORT BY REVIEW (ascending and descending)
+  //SORT BY PRICE (ascending and descending)
+  //SORT BY DISTANCE (ascending and descending)
+
 import React, { useEffect, useRef, useState } from "react";
 import ApiSearchbar from "../../organisms/apiSearchbar/apiSearchbar";
 import { useSearch } from "../../molecules/useSearch";
@@ -59,7 +64,7 @@ const Results: React.FC = () => {
                   <div className="grid grid-cols-1 gap-5 mt-6">
                   {/* Render only the first 5 hotels add 5 for each time the user presses "see more" */}
                     {data?.result?.hotels?.length > 0 ? (
-                      data.result.hotels.slice(0, visibleHotelsCount).map((hotel) => (
+                      data?.result?.hotels?.slice(0, visibleHotelsCount).map((hotel) => (
                       <HotelCard key={hotel.hotel_id} hotel={hotel} />
                       ))
                     ) : (<p className="text-white">No results found.</p>)}
