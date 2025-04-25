@@ -38,9 +38,13 @@ exports.searchAPI = (req, res) => {
 
 exports.display = (req, res) => {
     const hotel_id = req.params.id; // grab hotel id from request
+    const arrival = 0;
+    const departure = 0;
+    
+
     console.log(hotel_id);
 
-    axios.get(`https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails?hotel_id=${hotel_id}&arrival_date=2025-04-30&departure_date=2025-05-04&adults=2&room_qty=1&units=metric&temperature_unit=c&languagecode=en-us&currency_code=EUR`,
+    axios.get(`https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails?hotel_id=${hotel_id}&arrival_date=2025-04-30&departure_date=2025-05-04&adults=2&room_qty=1&units=metric&temperature_unit=c&languagecode=en-us&currency_code=USD`,
     { 
         headers: {
             'x-rapidapi-key': '69150d8f56msh7db24ce8d7bf7b0p1e6bd6jsn10374c36c8b6',
