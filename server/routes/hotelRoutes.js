@@ -1,5 +1,5 @@
 const express = require('express');
-const {rateLimiter} = require('../middlewares/rateLimiter');
+const { rateLimiter } = require('../middlewares/rateLimiter');
 const controller = require('../controllers/hotelController')
 
 const router = express.Router();
