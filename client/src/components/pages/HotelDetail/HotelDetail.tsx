@@ -1,71 +1,161 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import dummyHotels from "../../../data/dummyHotels.json";
 
+type Hotel = {
+  hotel_id: number;
+  hotel_name: string;
+  address: string;
+  city: string;
+  country_trans: string;
+  url: string;
+  review_nr: number;
+  latitude: number;
+  longitude: number;
+  property_highlight_strip: { name: string }[];
+  facilities_block: { facilities: { name: string }[] };
+  rawData: {
+    photoUrls: string[];
+    reviewScore: number;
+    reviewScoreWord: string;
+    priceBreakdown?: {
+      grossPrice?: {
+        value: number;
+      };
+    };
+  };
+};
 
-const HotelDetail: React.FC = () => {
-  const { id } = useParams();
+const HotelDetail = () => {
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const hotel = dummyHotels.find((h) => h.hotelId === Number(id));
+  const [hotel, setHotel] = useState<Hotel | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!hotel) {
-    return (
-      <div className="p-10 text-center">
-        <h2 className="text-2xl font-semibold text-gray-700">Hotel not found.</h2>
-        <button
-          onClick={() => navigate(-1)}
-          className="mt-4 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition"
-        >
-          Go Back
-        </button>
-      </div>
-    );
+  useEffect(() => {
+    const fetchHotel = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/hotels/${id}`);
+        if (!response.ok) throw new Error("Failed to fetch hotel details");
+
+        const result = await response.json();
+        setHotel(result.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHotel();
+  }, [id]);
+
+  const getBetterPhotoUrl = (url: string) => {
+    return url.replace("/square60/", "/square400/");
+  };
+
+  if (loading) {
+    return <div>Loading</div>;
   }
 
+  if (!hotel) {
+    return <div>Hotel not found.</div>;
+  }
+
+  const photoUrl = hotel.rawData?.photoUrls?.[0];
+
   return (
-    <section className="relative w-full h-[500px] flex items-center justify-center text-center text-white z-[1]">
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover z-[-1]"
+    <div className="max-w-4xl mx-auto p-4 space-y-6">
+      {/* Back Button */}
+      <button
+        onClick={() => navigate(-1)}
+        className="inline-block px-4 py-2 mb-4 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition"
       >
-        <source src="/hotel-video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <div className="absolute top-0 left-0 w-full h-full bg-black/50 z-0"></div>
+        ← Back to Search
+      </button>
 
-      <div className="relative z-10 p-5 max-w-4xl mx-auto">
-        {/* White box with rounded corners */}
-        <div className="bg-white bg-opacity-90 p-6 rounded-lg shadow-lg">
-          <button
-            onClick={() => navigate(-1)}
-            className="mb-6 inline-block px-4 py-2 bg-blue-500 rounded hover:bg-blue-600 transition text-sm"
-          >
-            ← Back to Results
-          </button>
+      {/* Hotel Image */}
+      {photoUrl && (
+        <img
+          src={getBetterPhotoUrl(photoUrl)}
+          alt={hotel.hotel_name}
+          className="w-full h-80 object-cover rounded-xl shadow-lg"
+        />
+      )}
 
-          <h1 className="text-3xl font-bold mb-4 text-black">{hotel.hotelName}</h1>
-
-          <img
-            src={hotel.hotelImage}
-            alt={hotel.hotelName}
-            className="w-full h-auto rounded-lg shadow-md mb-6 text-black"
-          />
-
-          <p className="text-lg text-black mb-2">{hotel.hotelAddress}</p>
-          <p className="text-md text-black mb-6">{hotel.description}</p>
-
-          <button
-            className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
-            onClick={() => alert("Booking functionality coming soon!")}
-          >
-            Book Now
-          </button>
-        </div>
+      {/* Hotel Name and Rating */}
+      <div>
+        <h1 className="text-3xl font-bold">{hotel.hotel_name}</h1>
+        <p className="text-gray-500">
+          {hotel.city}, {hotel.country_trans}
+        </p>
+        {hotel.rawData?.reviewScore && (
+          <p className="mt-1 text-yellow-600">
+            {hotel.rawData.reviewScore} ★ {hotel.rawData.reviewScoreWord}
+          </p>
+        )}
       </div>
-    </section>
+
+      {/* Address */}
+      <div>
+        <h2 className="text-xl font-semibold mb-2">Address</h2>
+        <a
+          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+            `${hotel.address}, ${hotel.city}, ${hotel.country_trans}`
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:underline"
+        >
+          {hotel.address}
+        </a>
+      </div>
+
+      {/* Highlights */}
+      {hotel.property_highlight_strip?.length > 0 && (
+        <div>
+          <h2 className="text-xl font-semibold mb-2">Highlights</h2>
+          <ul className="list-disc list-inside space-y-1">
+            {hotel.property_highlight_strip.map((item, index) => (
+              <li key={index}>{item.name}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Facilities */}
+      {hotel.facilities_block?.facilities?.length > 0 && (
+        <div>
+          <h2 className="text-xl font-semibold mb-2">Facilities</h2>
+          <ul className="list-disc list-inside space-y-1">
+            {hotel.facilities_block.facilities.map((facility, index) => (
+              <li key={index}>{facility.name}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Price */}
+      {hotel.rawData?.priceBreakdown?.grossPrice?.value && (
+        <div>
+          <h2 className="text-xl font-semibold mb-2">Price</h2>
+          <p className="text-green-600 font-bold">
+            ${hotel.rawData.priceBreakdown.grossPrice.value.toFixed(2)}
+          </p>
+        </div>
+      )}
+
+      {/* Booking Link */}
+      <div>
+        <a
+          href={hotel.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
+        >
+          View on Booking.com
+        </a>
+      </div>
+    </div>
   );
 };
 

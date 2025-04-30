@@ -1,12 +1,9 @@
-// TODO: STYLE SEE MORE BUTTON
-
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import ApiSearchbar from "../../organisms/apiSearchbar/apiSearchbar";
 import { useSearch } from "../../molecules/useSearch";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
 import HotelMap from "../../organisms/HotelMap";
 import HotelCard from "../../atoms/HotelCard";
-import { useLocation } from "react-router-dom";
 
 const Results: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -28,8 +25,6 @@ const Results: React.FC = () => {
     | null
   >(null);
 
-  const hotels: Hotel[] = data?.result?.hotels || [];
-
   type Hotel = {
     hotel_id: number;
     accessibilityLabel: string;
@@ -49,25 +44,24 @@ const Results: React.FC = () => {
     };
   };
 
-  // Helper: Extract numeric distance from accessibilityLabel
+  const hotels: Hotel[] = data?.result?.hotels || [];
+
   const extractDistanceFromLabel = (label: string): number => {
     const match = label.match(/([\d.]+)\s*km/i);
     return match ? parseFloat(match[1]) : Infinity;
   };
 
-  // Calculate average price of hotels
   const averagePrice = useMemo(() => {
     const prices = hotels
-      .map((hotel: Hotel) => hotel?.property?.priceBreakdown?.grossPrice?.value)
-      .filter((price: number | undefined) => typeof price === "number");
+      .map((hotel) => hotel?.property?.priceBreakdown?.grossPrice?.value)
+      .filter((price) => typeof price === "number");
 
     if (prices.length === 0) return 0;
 
-    const total = prices.reduce((sum: number, price: number) => sum + price, 0);
+    const total = prices.reduce((sum, price) => sum + price, 0);
     return total / prices.length;
   }, [hotels]);
 
-  // Sort hotels
   const sortedHotels = useMemo(() => {
     const sorted = [...hotels];
 
@@ -131,7 +125,6 @@ const Results: React.FC = () => {
         <div className="absolute top-0 left-0 w-full h-full bg-black/60 z-[-1]" />
 
         <div className="relative z-10 flex flex-row h-full p-5 gap-4">
-          {/* Left side: Results */}
           <div className="w-1/2 overflow-y-auto" ref={resultsRef}>
             <h1 className="text-3xl font-bold text-white mb-6 text-center">
               Here are your results for {data?.result?.destination_info?.label || "your search"}!
@@ -139,12 +132,12 @@ const Results: React.FC = () => {
 
             <ApiSearchbar onSearch={handleSearch} />
 
-            {/* Sort dropdown */}
             <div className="flex justify-end mb-4">
               <select
                 value={sortBy || ""}
                 onChange={(e) =>
-                  setSortBy( e.target.value as
+                  setSortBy(
+                    e.target.value as
                       | "review-asc"
                       | "review-desc"
                       | "price-asc"
@@ -152,7 +145,8 @@ const Results: React.FC = () => {
                       | "distance-asc"
                       | "distance-desc"
                       | null
-                  )}
+                  )
+                }
                 className="bg-white text-black px-4 py-2 rounded-md mt-5">
                 <option value="">Sort by</option>
                 <option value="review-asc">Review Score (Low to High)</option>
@@ -190,18 +184,14 @@ const Results: React.FC = () => {
 
             {sortedHotels.length > visibleHotelsCount && (
               <div className="flex justify-center mt-4">
-  <div className="w-full max-w-xl">
-    <button
-      onClick={handleSeeMore}
-      className="w-full bg-blue-900 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"
-    >
-      See More
-    </button>
-  </div>
-</div>
-
-
-
+                <div className="w-full max-w-xl">
+                  <button
+                    onClick={handleSeeMore}
+                    className="w-full bg-blue-900 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
+                    See More
+                  </button>
+                </div>
+              </div>
             )}
           </div>
 
@@ -212,7 +202,15 @@ const Results: React.FC = () => {
                 height: resultsRef.current?.offsetHeight || "100%",
                 transition: "height 0.3s ease",
               }}>
-              <HotelMap hotels={data?.hotels || []} />
+              <HotelMap
+                hotels={sortedHotels.map((hotel) => ({
+                  hotelId: hotel.hotel_id,
+                  hotelName: hotel.property.name,
+                  hotelAddress: hotel.accessibilityLabel || "No address available",
+                  lat: hotel.property.latitude,
+                  lng: hotel.property.longitude,
+                }))}
+              />
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@ export const useSearch = () => {
     setError("");
 
     try {
-      const response = await fetch(`http://localhost:5000/api/?query=${query}`);
+      const response = await fetch(`http://localhost:5000/hotels/?query=${query}`);
       console.log(query);
 
       if (!response.ok) {
