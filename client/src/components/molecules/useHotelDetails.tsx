@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { baseURL } from "../../services/hotelService";
 
 interface ApiResponse {
   property: {
@@ -27,7 +26,7 @@ export const useHotelDetails = (id: string) => {
       setError("");
 
       try {
-        const response = await fetch(`${baseURL}/hotels/${id}`);
+        const response = await fetch(`https://cookings.onrender.com//hotels/${id}`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch hotel details");

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { baseURL } from "../../services/hotelService";
 
 interface ApiResponse {
   // Define the expected structure of your API response if known
@@ -18,7 +17,7 @@ export const useSearch = () => {
     setError("");
 
     try {
-      const response = await fetch(`${baseURL}/hotels/?query=${query}`);
+      const response = await fetch(`https://cookings.onrender.com//hotels/?query=${query}`);
       console.log(query);
 
       if (!response.ok) {
