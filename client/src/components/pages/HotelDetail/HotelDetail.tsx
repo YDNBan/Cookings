@@ -34,7 +34,8 @@ const HotelDetail = () => {
   useEffect(() => {
     const fetchHotel = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/hotels/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/hotels/${id}`);
+
         if (!response.ok) throw new Error("Failed to fetch hotel details");
 
         const result = await response.json();

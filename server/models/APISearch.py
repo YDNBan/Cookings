@@ -3,13 +3,18 @@ import sys
 import json
 import datetime
 import requests
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 import os
 
-load_dotenv()
+#load_dotenv()
 
 # API credentials and host info
-API_KEY = os.getenv("API_KEY")
+#API_KEY = os.getenv("API_KEY")
+API_KEY = 'ba8ff2124amsh4cbad9f1f71bc72p1a1c7ejsn070ceb5ca49e'
+if not API_KEY:
+    print(json.dumps({"error": "Missing API_KEY in environment variables"}))
+    sys.exit(1)
+
 API_HOST = "booking-com15.p.rapidapi.com"
 HEADERS = {
     "x-rapidapi-host": API_HOST,
@@ -25,6 +30,7 @@ def search_destination(query, country_filter=None):
         return None, None
 
     data = response.json()
+    print(f"Destination API Response: {response.status_code}", file=sys.stderr)
     
     if isinstance(data, dict) and "data" in data:
         destinations = data["data"]
