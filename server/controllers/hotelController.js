@@ -1,7 +1,7 @@
 const { exec } = require("child_process");
 const path = require("path");
 const axios = require('axios');
-const apiKey = process.env.API_KEY;
+const apiKey = 'ba8ff2124amsh4cbad9f1f71bc72p1a1c7ejsn070ceb5ca49e'
 exports.searchAPI = (req, res) => {
     const inputData = req.query.query;
     console.log(inputData);
