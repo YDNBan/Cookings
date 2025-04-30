@@ -34,7 +34,7 @@ const HotelDetail = () => {
   useEffect(() => {
     const fetchHotel = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/hotels/${id}`);
+        const response = await fetch(`https://cookings.onrender.com/hotels/${id}`);
 
         if (!response.ok) throw new Error("Failed to fetch hotel details");
 
