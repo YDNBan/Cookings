@@ -17,7 +17,7 @@ export const useSearch = () => {
     setError("");
 
     try {
-      const response = await fetch(`https://cookings.onrender.com//hotels/?query=${query}`);
+      const response = await fetch(`https://cookings.onrender.com/hotels/?query=${query}`);
       console.log(query);
 
       if (!response.ok) {
