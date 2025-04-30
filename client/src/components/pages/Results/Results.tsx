@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import ApiSearchbar from "../../organisms/apiSearchbar/apiSearchbar";
 import { useSearch } from "../../molecules/useSearch";
-import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import HotelMap from "../../organisms/HotelMap";
 import HotelCard from "../../atoms/HotelCard";
 
 const Results: React.FC = () => {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
+  //const [searchParams] = useSearchParams();
+  //const navigate = useNavigate();
   const resultsRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
