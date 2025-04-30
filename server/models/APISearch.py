@@ -3,9 +3,13 @@ import sys
 import json
 import datetime
 import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # API credentials and host info
-API_KEY = "10d26a435emsh44471c2f9a778aap175a03jsnef90e1ab0d71"
+API_KEY = os.getenv("API_KEY")
 API_HOST = "booking-com15.p.rapidapi.com"
 HEADERS = {
     "x-rapidapi-host": API_HOST,
