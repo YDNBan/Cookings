@@ -1,5 +1,6 @@
 import React from "react";
 import connorPfp from "../../../../public/IMG_9893.jpg";
+import domPfp from "../../../../public/Dom.jpg";
 
 const Info: React.FC = () => {
   return (
@@ -44,7 +45,7 @@ const Info: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-4 mb-6 text-left">
-            <img src="" alt="Team pfp" className="w-24 h-24 rounded-full shadow-md" />
+            <img src={domPfp} alt="Team pfp" className="w-24 h-24 rounded-full shadow-md" />
             <div>
                 <h4 className="text-xl font-bold">Dom Nieban</h4>
                 <p>Back-End Developer/Project Manager</p>
