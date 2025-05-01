@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import '../../../index.css';
 
 function Navbar() {
@@ -6,7 +7,7 @@ function Navbar() {
             {/* Logo positioned separately */}
             <img 
                 src="/map-marker-512.webp"
-                alt="" 
+                alt="Logo" 
                 className="absolute left-5 top-1/2 transform -translate-y-1/2 w-35 h-auto object-contain p-4"
             />
 
@@ -14,10 +15,30 @@ function Navbar() {
             <div className="flex flex-col items-center">
                 <h1 className="text-4xl font-bold text-shadow-md">Hotel Tracker</h1>
                 <div className="flex flex-row justify-evenly gap-5 p-4">
-                    <a className="px-5 py-3 text-white bg-gray-800 rounded-[15px] hover:bg-[#4c7d7d]" href="/">Home</a>
-                    <a className="px-5 py-3 text-white bg-gray-800 rounded-[15px] hover:bg-[#4c7d7d]" href="/search">Search</a>
-                    <a className="px-5 py-3 text-white bg-gray-800 rounded-[15px] hover:bg-[#4c7d7d]" href="/info">Info</a>
-                    <a className="px-5 py-3 text-white bg-gray-800 rounded-[15px] hover:bg-[#4c7d7d]" href="/contact">Contact</a>
+                    <Link 
+                        to="/" 
+                        className="px-5 py-3 text-white bg-gray-800 rounded-[15px] hover:bg-[#4c7d7d]"
+                    >
+                        Home
+                    </Link>
+                    <Link 
+                        to="/search" 
+                        className="px-5 py-3 text-white bg-gray-800 rounded-[15px] hover:bg-[#4c7d7d]"
+                    >
+                        Search
+                    </Link>
+                    <Link 
+                        to="/info" 
+                        className="px-5 py-3 text-white bg-gray-800 rounded-[15px] hover:bg-[#4c7d7d]"
+                    >
+                        Info
+                    </Link>
+                    <Link 
+                        to="/contact" 
+                        className="px-5 py-3 text-white bg-gray-800 rounded-[15px] hover:bg-[#4c7d7d]"
+                    >
+                        Contact
+                    </Link>
                 </div>
             </div>
         </div>
@@ -25,3 +46,4 @@ function Navbar() {
 }
 
 export default Navbar;
+
