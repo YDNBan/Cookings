@@ -14,7 +14,7 @@ app.use('/hotels', hotelRoutes);
 
 // Use environment variables for port and host
 const PORT = process.env.PORT || 5000;
-const HOST = '0.0.0.0'; // Must be 0.0.0.0 for Render to detect the open port
+const HOST = 'localhost'; // Must be 0.0.0.0 for Render to detect the open port
 
 // Start the server
 app.listen(PORT, HOST, () => {

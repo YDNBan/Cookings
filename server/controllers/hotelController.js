@@ -27,7 +27,7 @@ exports.searchAPI = (req, res) => {
 
         try {
             const result = JSON.parse(stdout);
-            console.log(result);
+            //console.log(result);
             return res.json({ result });
         } catch (parseError) {
             console.error("Error parsing Python output:", parseError);
@@ -38,13 +38,16 @@ exports.searchAPI = (req, res) => {
 
 exports.display = (req, res) => {
     const hotel_id = req.params.id; // grab hotel id from request
-    const arrival = 0;
-    const departure = 0;
-    
 
-    console.log(hotel_id);
+    // These are arbitrary dates meant to have users gauge at the prices for a hotel
+    const today = new Date();
+    const arrival = today.toISOString().split("T"[0])[0];
 
-    axios.get(`https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails?hotel_id=${hotel_id}&arrival_date=2025-04-30&departure_date=2025-05-04&adults=2&room_qty=1&units=metric&temperature_unit=c&languagecode=en-us&currency_code=USD`,
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1)
+    const departure = tomorrow.toISOString().split("T")[0];
+
+    axios.get(`https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails?hotel_id=${hotel_id}&arrival_date=${arrival}&departure_date=${departure}&adults=2&room_qty=1&units=metric&temperature_unit=c&languagecode=en-us&currency_code=USD`,
     { 
         headers: {
             'x-rapidapi-key': `${apiKey}`, 
@@ -52,6 +55,7 @@ exports.display = (req, res) => {
         }
     })
     .then(response => {
+        
         res.status(200).json(response.data); // this line is what actually sends back the data to client
     })
     .catch(error => {
